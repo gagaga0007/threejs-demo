@@ -15,7 +15,7 @@ window.onload = () => {
   });
   routesElement.append(...buttons);
 
-  // 一上来默认显示最后一个菜单
+  // 默认显示最后一个菜单
   onMenuChange(routeKeys[routeKeys.length - 1], routeKeys.length - 1);
 
   // 菜单栏展开收起
