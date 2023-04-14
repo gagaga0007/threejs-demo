@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "./three.js-r144/examples/jsm/controls/OrbitControls.js";
 
-// HTML 中的 id
 export const IDs = {
   CONTAINER: "container",
   ROUTE_CONTAINER: "route-container",
@@ -16,6 +15,9 @@ export const IDs = {
  * @param width 宽度
  * @param height 高度
  * @param showAxesHelper 是否显示坐标轴辅助线
+ * @param disableAmbient 是否不创建环境光
+ * @param disablePointLight 是否不创建点光源
+ * @param disableRender 是否不使用默认 render
  * @param cameraPosition 相机配置 camera.position.set(x, y, z)
  * @param cameraLookAt 相机配置 camera.lookAt(x, y, z)
  * @returns
