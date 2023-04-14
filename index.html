@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>three.js demo</title>
+
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+
+  <body>
+    <div id="route-container">
+      <div id="menu-show">←</div>
+      <div id="routes"></div>
+    </div>
+    <div id="container"></div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "../three.js-r144/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.144.0/examples/jsm/",
+          "dat.gui": "../dat.gui-master/build/dat.gui.module.js"
+        }
+      }
+    </script>
+    <script defer type="module" src="./index.js"></script>
+
+    <!-- es 模块相关库 -->
+    <script defer src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <!-- gsap 动画库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+  </body>
+</html>
