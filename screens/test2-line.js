@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { initThree } from "./model.js";
+import { initThree } from "../model.js";
 
 /**
  * 画线，执行后应当出现一个白色向上的折线

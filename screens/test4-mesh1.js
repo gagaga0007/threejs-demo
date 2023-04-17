@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { initThree } from "./model.js";
+import { initThree } from "../model.js";
 
 /**
  * 利用缓冲区生成一个由两个三角形组成的矩形

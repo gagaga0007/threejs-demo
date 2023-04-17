@@ -1,6 +1,6 @@
 import * as dat from "dat.gui";
 import * as THREE from "three";
-import { initThree } from "./model.js";
+import { initThree } from "../model.js";
 
 /**
  * 使用 dat.gui 第三方库实现控制栏

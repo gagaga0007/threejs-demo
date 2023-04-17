@@ -17,6 +17,7 @@ export const IDs = {
  * @param showAxesHelper 是否显示坐标轴辅助线
  * @param disableAmbient 是否不创建环境光
  * @param disablePointLight 是否不创建点光源
+ * @param disableControls 是否不创建控制器
  * @param disableRender 是否不使用默认 render
  * @param cameraPosition 相机配置 camera.position.set(x, y, z)
  * @param cameraLookAt 相机配置 camera.lookAt(x, y, z)
@@ -28,6 +29,7 @@ export const initThree = ({
   showAxesHelper = true,
   disableAmbient = false,
   disablePointLight = false,
+  disableControls = false,
   disableRender = false,
   cameraPosition = { x: 200, y: 200, z: 200 },
   cameraLookAt = { x: 0, y: 0, z: 0 },
@@ -53,7 +55,7 @@ export const initThree = ({
   }
 
   // 创建一个透视相机
-  const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+  const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 2000);
   camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
   camera.lookAt(cameraLookAt.x, cameraLookAt.y, cameraLookAt.z);
 
@@ -62,11 +64,14 @@ export const initThree = ({
   // 渲染的宽高，px
   renderer.setSize(width, height);
 
-  // 轨道控制器，用于鼠标控制
-  const controls = new OrbitControls(camera, renderer.domElement);
-  // 控制器惯性，必须在渲染函数中调用 update()
-  controls.enableDamping = true;
-  controls.update();
+  let controls;
+  if (!disableControls) {
+    // 轨道控制器，用于鼠标控制
+    controls = new OrbitControls(camera, renderer.domElement);
+    // 控制器惯性，必须在渲染函数中调用 update()
+    controls.enableDamping = true;
+    controls.update();
+  }
 
   // 添加坐标轴辅助器
   let axesHelper;
@@ -80,7 +85,7 @@ export const initThree = ({
     // 渲染下一帧调用的函数
     requestAnimationFrame(render);
     // controls 设置惯性必须调用 update()
-    controls.update();
+    if (!!controls) controls.update();
     renderer.render(scene, camera);
   }
 

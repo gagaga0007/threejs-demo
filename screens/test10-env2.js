@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { initThree } from "./model.js";
+import { initThree } from "../model.js";
 import { RGBELoader } from "three/addons/loaders/RGBELoader";
 
 /**

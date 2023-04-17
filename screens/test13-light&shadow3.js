@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import * as dat from "dat.gui";
-import { initThree } from "./model.js";
+import { initThree } from "../model.js";
 
 /**
  * 光源、阴影 - 点光源

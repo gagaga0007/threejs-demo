@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { IDs, initThree } from "./model.js";
+import { IDs, initThree } from "../model.js";
 
 /**
  * demo，演示一些功能

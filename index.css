@@ -45,6 +45,10 @@ body {
   flex-shrink: 0;
 }
 
+::-webkit-scrollbar {
+  height: 0;
+}
+
 #container {
   flex: 1;
   position: relative;
