@@ -1,5 +1,5 @@
-import { IDs } from "./model.js";
-import { Routes } from "./routes.js";
+import { IDs } from "./core/model.js";
+import { Routes } from "./core/routes.js";
 
 window.onload = () => {
   const routeKeys = Object.keys(Routes);

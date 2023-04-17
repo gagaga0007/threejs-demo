@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { initThree } from "../model.js";
+import { initThree } from "../core/model.js";
 
 /**
  * 材质 - 纹理的一些效果、透明纹理、遮挡纹理

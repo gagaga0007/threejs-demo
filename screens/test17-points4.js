@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { initThree } from "../model.js";
+import { initThree } from "../core/model.js";
 
 /**
  * 点、点材质 - 星系效果

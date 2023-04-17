@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { initThree } from "../model.js";
+import { initThree } from "../core/model.js";
 
 /**
  * 设置场景背景、环境纹理

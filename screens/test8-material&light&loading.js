@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { IDs, initThree } from "../model.js";
+import { IDs, initThree } from "../core/model.js";
 
 /**
  * 纹理、光源 - 环境光、直线光源、置换纹理、环境纹理、粗糙度、金属度、法线、贴图事件、加载事件
