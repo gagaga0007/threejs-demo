@@ -19,8 +19,10 @@ export const IDs = {
  * @param disablePointLight 是否不创建点光源
  * @param disableControls 是否不创建控制器
  * @param disableRender 是否不使用默认 render
+ * @param disableAppend 是否不挂载到页面
  * @param cameraPosition 相机配置 camera.position.set(x, y, z)
  * @param cameraLookAt 相机配置 camera.lookAt(x, y, z)
+ * @param rendererOptions 渲染器配置
  * @returns
  */
 export const initThree = ({
@@ -31,8 +33,10 @@ export const initThree = ({
   disablePointLight = false,
   disableControls = false,
   disableRender = false,
+  disableAppend = false,
   cameraPosition = { x: 200, y: 200, z: 200 },
   cameraLookAt = { x: 0, y: 0, z: 0 },
+  rendererOptions = {},
 } = {}) => {
   // 创建场景
   const scene = new THREE.Scene();
@@ -60,7 +64,7 @@ export const initThree = ({
   camera.lookAt(cameraLookAt.x, cameraLookAt.y, cameraLookAt.z);
 
   // 创建一个 WebGL 渲染器
-  const renderer = new THREE.WebGLRenderer();
+  const renderer = new THREE.WebGLRenderer(rendererOptions);
   // 渲染的宽高，px
   renderer.setSize(width, height);
 
@@ -109,10 +113,12 @@ export const initThree = ({
     renderer.setPixelRatio(window.devicePixelRatio);
   });
 
-  // 挂载到 HTML 元素上
-  const container = document.getElementById(IDs.CONTAINER);
-  const canvasElement = renderer.domElement;
-  container.appendChild(canvasElement);
+  if (!disableAppend) {
+    // 挂载到 HTML 元素上
+    const container = document.getElementById(IDs.CONTAINER);
+    const canvasElement = renderer.domElement;
+    container.appendChild(canvasElement);
+  }
 
   return { scene, ambient, point, camera, renderer, controls, axesHelper, render };
 };

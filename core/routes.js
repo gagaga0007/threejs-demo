@@ -16,6 +16,7 @@ import test15 from "../screens/test15-points2.js";
 import test16 from "../screens/test16-points3.js";
 import test17 from "../screens/test17-points4.js";
 import test18 from "../screens/test18-interactive.js";
+import test19 from "../screens/test19-homePage.js";
 
 export const Routes = {
   demo: test1,
@@ -36,4 +37,5 @@ export const Routes = {
   points3: test16,
   points4: test17,
   interactive: test18,
+  homePage: test19,
 };
