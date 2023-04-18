@@ -27,8 +27,8 @@ export default () => {
   const mouse = new THREE.Vector2();
 
   // 监听鼠标事件
-  window.addEventListener("click", onMouseMove);
-  function onMouseMove(event) {
+  window.addEventListener("click", onMouseClick);
+  function onMouseClick(event) {
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -((event.clientY / window.innerHeight) * 2 - 1);
     raycaster.setFromCamera(mouse, camera);
@@ -43,7 +43,7 @@ export default () => {
 
   return {
     beforeDestroy: () => {
-      window.removeEventListener("click", onMouseMove);
+      window.removeEventListener("click", onMouseClick);
     },
   };
 };
