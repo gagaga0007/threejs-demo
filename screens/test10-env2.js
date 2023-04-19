@@ -12,7 +12,7 @@ export default async () => {
 
   // 加载 HDR 环境图
   const rgbeLoader = new RGBELoader();
-  const texture = await rgbeLoader.loadAsync("./assets/hdr/002.hdr");
+  const texture = await rgbeLoader.loadAsync("./assets/images/hdr/002.hdr");
   // 设置映射模式
   // 默认值为 UVMapping，使用网格坐标进行映射
   // EquirectangularReflectionMapping，使用等距圆柱投影的环境贴图（经纬线映射贴图）（可以理解为像全景拍照得到的照片一样，一张把环境图展开的图片）

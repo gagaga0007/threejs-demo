@@ -48,7 +48,7 @@ export default () => {
   const textureLoader = new THREE.TextureLoader(loadingManager); // 贴图 loader。使用 loadingManager 管理，用当前 loader 加载的资源都进入传入的加载管理器
   // 整体的平面贴图
   const texture = textureLoader.load(
-    "./assets/door/color.jpg",
+    "./assets/images/door/color.jpg",
     () => {
       console.log("color 加载完成");
     },
@@ -60,17 +60,17 @@ export default () => {
     }
   );
   // 透明贴图（只保留门的部分）
-  const alphaTexture = textureLoader.load("./assets/door/alpha.jpg");
+  const alphaTexture = textureLoader.load("./assets/images/door/alpha.jpg");
   // 遮挡贴图（门的线条）
-  const aoTexture = textureLoader.load("./assets/door/ambientOcclusion.jpg");
+  const aoTexture = textureLoader.load("./assets/images/door/ambientOcclusion.jpg");
   // 置换贴图（门的部分突出）
-  const displacementTexture = textureLoader.load("./assets/door/height.jpg");
+  const displacementTexture = textureLoader.load("./assets/images/door/height.jpg");
   // 粗糙度贴图（门左侧合页漫反射）
-  const roughnessTexture = textureLoader.load("./assets/door/roughness.jpg");
+  const roughnessTexture = textureLoader.load("./assets/images/door/roughness.jpg");
   // 金属度贴图（门的金属部分）
-  const metalnessTexture = textureLoader.load("./assets/door/metalness.jpg");
+  const metalnessTexture = textureLoader.load("./assets/images/door/metalness.jpg");
   // 法线贴图（门在光照下显示的效果）
-  const normalTexture = textureLoader.load("./assets/door/normal.jpg");
+  const normalTexture = textureLoader.load("./assets/images/door/normal.jpg");
 
   // 添加材质
   const material = new THREE.MeshStandardMaterial({

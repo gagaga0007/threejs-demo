@@ -12,12 +12,12 @@ export default () => {
   // cube 贴图加载器
   const cubeTextureLoader = new THREE.CubeTextureLoader();
   const envMapTexture = cubeTextureLoader.load([
-    "./assets/env/1/px.jpg",
-    "./assets/env/1/nx.jpg",
-    "./assets/env/1/py.jpg",
-    "./assets/env/1/ny.jpg",
-    "./assets/env/1/pz.jpg",
-    "./assets/env/1/nz.jpg",
+    "./assets/images/env/1/px.jpg",
+    "./assets/images/env/1/nx.jpg",
+    "./assets/images/env/1/py.jpg",
+    "./assets/images/env/1/ny.jpg",
+    "./assets/images/env/1/pz.jpg",
+    "./assets/images/env/1/nz.jpg",
   ]);
 
   // 场景添加贴图为背景

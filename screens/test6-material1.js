@@ -10,7 +10,7 @@ export default () => {
 
   // 导入贴图
   const textureLoader = new THREE.TextureLoader();
-  const texture1 = textureLoader.load("./assets/door/color.jpg");
+  const texture1 = textureLoader.load("./assets/images/door/color.jpg");
   // 偏移 0 ~ 1
   // texture1.offset.x = 0.5;
   // texture1.offset.y = 0.5;

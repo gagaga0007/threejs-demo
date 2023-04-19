@@ -39,7 +39,7 @@ export default () => {
 
   // 导入并纹理
   const textureLoader = new THREE.TextureLoader();
-  const pointTexture = textureLoader.load("./assets/particles/1.png");
+  const pointTexture = textureLoader.load("./assets/images/particles/1.png");
 
   // —————— 设置材质属性 ——————————
   pointsMaterial.sizeAttenuation = true;

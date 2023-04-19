@@ -9,7 +9,7 @@ export default () => {
 
   // 加载纹理
   const textureLoader = new THREE.TextureLoader();
-  const particlesTexture = textureLoader.load("./assets/particles/1.png");
+  const particlesTexture = textureLoader.load("./assets/images/particles/1.png");
 
   const params = {
     count: 30000, // 生成数量

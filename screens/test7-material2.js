@@ -9,9 +9,9 @@ export default () => {
 
   // 导入贴图
   const textureLoader = new THREE.TextureLoader();
-  const texture = textureLoader.load("./assets/door/color.jpg");
-  const alphaTexture = textureLoader.load("./assets/door/alpha.jpg");
-  const aoTexture = textureLoader.load("./assets/door/ambientOcclusion.jpg");
+  const texture = textureLoader.load("./assets/images/door/color.jpg");
+  const alphaTexture = textureLoader.load("./assets/images/door/alpha.jpg");
+  const aoTexture = textureLoader.load("./assets/images/door/ambientOcclusion.jpg");
 
   // 纹理显示效果设置
   // 默认为 LinearFilter，是获取四个最接近的纹素，并在他们之间进行双线性插值（可以理解为比较清晰）

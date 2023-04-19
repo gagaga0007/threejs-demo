@@ -52,9 +52,9 @@ export default () => {
   };
 
   // 生成三个不同效果的雪花
-  const points1 = createPoints("./assets/particles/snow.png");
-  const points2 = createPoints("./assets/particles/14.png");
-  const points3 = createPoints("./assets/particles/3.png");
+  const points1 = createPoints("./assets/images/particles/snow.png");
+  const points2 = createPoints("./assets/images/particles/14.png");
+  const points3 = createPoints("./assets/images/particles/3.png");
 
   // 设置相机远端面，此处是为了不显示后方向上旋转的雪花
   camera.far = 120.0;
