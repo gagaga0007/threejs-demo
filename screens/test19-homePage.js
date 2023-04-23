@@ -5,9 +5,11 @@ import { IDs, initThree } from "../core/model.js";
  * 使用 threejs 制作首页效果
  * 实现方式：三个 page 放在同一个场景中，指定一个 canvas
  * 其它实现方方式：创建多个 canvas 并设置各自的样式，创建多个场景并分别指定不同的 canvas，每个场景单独设置各自的内容（未测试可行性）
+ *
+ * HTML 处使用了 vscode 插件 Comment tagged templates 用于语法高亮显示
  */
 export default () => {
-  const html = `
+  const html = /* html */ `
     <link rel="stylesheet" href="../assets/css/test19.css" />
     <div class="page page1">
       <h1>THREE.Raycaster</h1>
