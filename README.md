@@ -16,6 +16,8 @@ threeDemo
   |- note - 笔记.
 |
 |- core - 一些核心文件.
+  |
+  |- shader - 着色器文件.
 |
 |- modules - 依赖包. 如 three.js, dat.gui 等.
 |
