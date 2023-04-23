@@ -12,14 +12,14 @@ threeDemo
   |- css - css 文件.
   |
   |- images - 图片.
-  |
-  |- note - 笔记.
 |
 |- core - 一些核心文件.
   |
   |- shader - 着色器文件.
 |
 |- modules - 依赖包. 如 three.js, dat.gui 等.
+|
+|- note - 笔记.
 |
 |- screens - 具体页面.
 ```
