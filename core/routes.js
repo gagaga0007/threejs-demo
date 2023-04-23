@@ -17,6 +17,8 @@ import test16 from "../screens/test16-points3.js";
 import test17 from "../screens/test17-points4.js";
 import test18 from "../screens/test18-interactive.js";
 import test19 from "../screens/test19-homePage.js";
+import test20 from "../screens/test20-shader1.js";
+import test21 from "../screens/test21-shader2.js";
 
 export const Routes = {
   demo: test1,
@@ -38,4 +40,6 @@ export const Routes = {
   points4: test17,
   interactive: test18,
   homePage: test19,
+  shader1: test20,
+  shader2: test21,
 };
