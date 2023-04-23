@@ -1,13 +1,16 @@
 # threeDemo
 
-three.js 练习 demo。
+three.js 个人练习。
 
 > 浏览器运行 index.html 即可
 
 ```
 threeDemo
 |
-|- assets - 静态资源. 如图片、css 等.
+|- assets - 静态资源.
+|-- css - css 文件.
+|-- images - 图片.
+|-- note - 笔记.
 |
 |- core - 一些核心文件.
 |
