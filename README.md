@@ -8,9 +8,12 @@ three.js 个人练习。
 threeDemo
 |
 |- assets - 静态资源.
-|-- css - css 文件.
-|-- images - 图片.
-|-- note - 笔记.
+  |
+  |- css - css 文件.
+  |
+  |- images - 图片.
+  |
+  |- note - 笔记.
 |
 |- core - 一些核心文件.
 |
