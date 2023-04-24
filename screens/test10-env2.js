@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { initThree } from "../core/model.js";
-import { RGBELoader } from "three/addons/loaders/RGBELoader";
+import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 
 /**
  * 设置 HDR 格式的场景背景和环境纹理
