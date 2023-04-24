@@ -64,4 +64,8 @@ export default () => {
   };
 
   render();
+
+  return {
+    beforeDestroy: () => gui.destroy(),
+  };
 };
