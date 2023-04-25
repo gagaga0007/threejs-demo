@@ -23,6 +23,7 @@ export const IDs = {
  * @param cameraPosition 相机配置 camera.position.set(x, y, z)
  * @param cameraLookAt 相机配置 camera.lookAt(x, y, z)
  * @param rendererOptions 渲染器配置
+ * @param onWindowResize 视口改变时传入的其它操作
  * @returns
  */
 export const initThree = ({
@@ -37,6 +38,7 @@ export const initThree = ({
   cameraPosition = { x: 200, y: 200, z: 200 },
   cameraLookAt = { x: 0, y: 0, z: 0 },
   rendererOptions = {},
+  onWindowResize,
 } = {}) => {
   // 创建场景
   const scene = new THREE.Scene();
@@ -111,6 +113,8 @@ export const initThree = ({
     renderer.setSize(newWidth, newHeight);
     // 设置渲染器像素比
     renderer.setPixelRatio(window.devicePixelRatio);
+
+    if (onWindowResize) onWindowResize();
   });
 
   if (!disableAppend) {
