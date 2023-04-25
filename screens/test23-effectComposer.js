@@ -38,7 +38,7 @@ export default () => {
 
   // 加载模型
   const gltfLoader = new GLTFLoader();
-  gltfLoader.load("../assets/models/glTF/DamagedHelmet.gltf", (gltf) => {
+  gltfLoader.load("../assets/models/DamagedHelmet/DamagedHelmet.gltf", (gltf) => {
     console.log(gltf);
     const mesh = gltf.scene.children[0];
     scene.add(mesh);
