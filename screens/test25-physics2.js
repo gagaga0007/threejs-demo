@@ -1,6 +1,5 @@
 import * as THREE from "three";
 import * as CANNON from "cannon-es";
-import * as dat from "dat.gui";
 import { initThree } from "../core/model.js";
 
 const cubePositionY = 40; // 立方体 y 轴
