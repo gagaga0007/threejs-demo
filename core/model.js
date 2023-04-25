@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { OrbitControls } from "../modules/three.js-r144/examples/jsm/controls/OrbitControls.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 export const IDs = {
   CONTAINER: "container",
