@@ -9,9 +9,13 @@ threeDemo
 |
 |- assets - 静态资源.
   |
+  |- audio - 音频.
+  |
   |- css - css 文件.
   |
   |- images - 图片.
+  |
+  |- models - 模型.
 |
 |- core - 一些核心文件.
   |
