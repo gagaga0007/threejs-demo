@@ -26,19 +26,19 @@ export default () => {
   const cubeTextureLoader = new THREE.CubeTextureLoader();
   // 添加环境纹理
   const envMapTexture = cubeTextureLoader.load([
-    "../assets/images/env/0/px.jpg",
-    "../assets/images/env/0/nx.jpg",
-    "../assets/images/env/0/py.jpg",
-    "../assets/images/env/0/ny.jpg",
-    "../assets/images/env/0/pz.jpg",
-    "../assets/images/env/0/nz.jpg",
+    "./assets/images/env/0/px.jpg",
+    "./assets/images/env/0/nx.jpg",
+    "./assets/images/env/0/py.jpg",
+    "./assets/images/env/0/ny.jpg",
+    "./assets/images/env/0/pz.jpg",
+    "./assets/images/env/0/nz.jpg",
   ]);
   scene.background = envMapTexture;
   scene.environment = envMapTexture;
 
   // 加载模型
   const gltfLoader = new GLTFLoader();
-  gltfLoader.load("../assets/models/DamagedHelmet/DamagedHelmet.gltf", (gltf) => {
+  gltfLoader.load("./assets/models/DamagedHelmet/DamagedHelmet.gltf", (gltf) => {
     console.log(gltf);
     const mesh = gltf.scene.children[0];
     scene.add(mesh);

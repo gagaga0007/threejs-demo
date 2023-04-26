@@ -16,7 +16,7 @@ export default () => {
 
   // 导入材质
   const textureLoader = new THREE.TextureLoader();
-  const texture = textureLoader.load("../assets/images/particles/flag.jpeg");
+  const texture = textureLoader.load("./assets/images/particles/flag.jpeg");
 
   // 创建原始着色器材质
   const rawShaderMaterial = new THREE.RawShaderMaterial({

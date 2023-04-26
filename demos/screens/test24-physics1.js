@@ -85,7 +85,7 @@ export default () => {
     // 某强度以上时播放碰撞声音（需要焦点在页面中，否则浏览器默认静音）
     if (impactStrength > 2) {
       // 创建碰撞声音
-      const hitSound = new Audio("../assets/audio/metalHit.mp3");
+      const hitSound = new Audio("./assets/audio/metalHit.mp3");
       const volume = impactStrength / 50;
       hitSound.volume = volume > 0.4 ? 0.4 : volume;
       hitSound.play(hitSound);

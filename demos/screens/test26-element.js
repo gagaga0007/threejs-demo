@@ -5,7 +5,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 export default () => {
   const container = document.getElementById(IDs.CONTAINER);
-  container.innerHTML += '<link rel="stylesheet" href="../assets/css/test26.css" />';
+  container.innerHTML += '<link rel="stylesheet" href="./assets/css/test26.css" />';
 
   const { scene, renderer, camera } = initThree({
     disableRender: true,
@@ -16,8 +16,8 @@ export default () => {
 
   // 导入材质
   const textureLoader = new THREE.TextureLoader();
-  const earthTexture = textureLoader.load("../assets/images/earth/earth_atmos_2048.jpg");
-  const moonTexture = textureLoader.load("../assets/images/earth/moon_1024.jpg");
+  const earthTexture = textureLoader.load("./assets/images/earth/earth_atmos_2048.jpg");
+  const moonTexture = textureLoader.load("./assets/images/earth/moon_1024.jpg");
 
   // 创建球体和材质 - 地球
   const earthGeometry = new THREE.SphereGeometry(5, 20, 20);

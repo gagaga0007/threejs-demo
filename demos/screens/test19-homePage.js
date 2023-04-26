@@ -10,7 +10,7 @@ import { IDs, initThree } from "../core/model.js";
  */
 export default () => {
   const html = /* html */ `
-    <link rel="stylesheet" href="../assets/css/test19.css" />
+    <link rel="stylesheet" href="./assets/css/test19.css" />
     <div class="page page1">
       <h1>THREE.Raycaster</h1>
       <h3>使用投射光实现交互效果（点击）</h3>
