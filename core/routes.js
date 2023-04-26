@@ -24,6 +24,7 @@ import test23 from "../screens/test23-effectComposer.js";
 import test24 from "../screens/test24-physics1.js";
 import test25 from "../screens/test25-physics2.js";
 import test26 from "../screens/test26-element.js";
+import test27 from "../screens/test27-curve.js";
 
 export const Routes = {
   demo: test1,
@@ -52,4 +53,5 @@ export const Routes = {
   physics1: test24,
   physics2: test25,
   element: test26,
+  curve: test27,
 };
