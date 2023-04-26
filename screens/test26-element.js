@@ -10,57 +10,54 @@ export default () => {
   const { scene, renderer, camera } = initThree({
     disableRender: true,
     disableControls: true,
-    cameraPosition: { x: 20, y: 20, z: 20 },
+    cameraPosition: { x: 0, y: 10, z: -25 },
     onWindowResize,
   });
 
   // 导入材质
   const textureLoader = new THREE.TextureLoader();
   const earthTexture = textureLoader.load("../assets/images/earth/earth_atmos_2048.jpg");
-  const earthNormalTexture = textureLoader.load("../assets/images/earth/earth_normal_2048.jpg");
-  const earthSpecularTexture = textureLoader.load("../assets/images/earth/earth_specular_2048.jpg");
   const moonTexture = textureLoader.load("../assets/images/earth/moon_1024.jpg");
 
   // 创建球体和材质 - 地球
-  const earthGeometry = new THREE.SphereGeometry(5, 16, 16);
+  const earthGeometry = new THREE.SphereGeometry(5, 20, 20);
   const earthMaterial = new THREE.MeshPhongMaterial({
     shininess: 5,
     map: earthTexture,
-    specularMap: earthSpecularTexture,
-    normalMap: earthNormalTexture,
   });
   const earth = new THREE.Mesh(earthGeometry, earthMaterial);
   scene.add(earth);
 
   // 创建球体和材质 - 月球
-  const moonGeometry = new THREE.SphereGeometry(1, 16, 16);
+  const moonGeometry = new THREE.SphereGeometry(1, 20, 20);
   const moonMaterial = new THREE.MeshPhongMaterial({
     shininess: 5,
     map: moonTexture,
   });
   const moon = new THREE.Mesh(moonGeometry, moonMaterial);
-  moon.position.set(10, 10, 10);
   scene.add(moon);
 
   // 添加标签 - 地球
   const earthDiv = document.createElement("div");
+  earthDiv.className = "label";
   earthDiv.innerHTML = "EARTH";
   // 实例化 div - 地球
   const earthLabel = new CSS2DObject(earthDiv);
-  earthLabel.position.set(0, 6, 0); // 注意：此处的位置是根据其父级元素确定的，如此处是相对于地球的位置
+  earthLabel.position.set(0, 5, 0); // 注意：此处的位置是根据其父级元素确定的，如此处是相对于地球的位置
   earth.add(earthLabel);
 
   // 添加标签 - 月球
   const moonDiv = document.createElement("div");
+  moonDiv.className = "label";
   moonDiv.innerHTML = "MOON";
   // 实例化 div - 月球
   const moonLabel = new CSS2DObject(moonDiv);
-  moonLabel.position.set(0, 2, 0);
+  moonLabel.position.set(0, 1, 0);
   moon.add(moonLabel);
 
   // 添加标签 - 亚洲
   const asiaDiv = document.createElement("div");
-  asiaDiv.className = "hidden";
+  asiaDiv.className = "label hidden";
   asiaDiv.innerHTML = "ASIA";
   // 实例化 div - 地球
   const asiaLabel = new CSS2DObject(asiaDiv);
@@ -74,9 +71,6 @@ export default () => {
   labelRenderer.domElement.style.left = 0;
   labelRenderer.domElement.style.top = 0;
   labelRenderer.domElement.style.zIndex = 10;
-  labelRenderer.domElement.style.color = "#ffffff";
-  labelRenderer.domElement.style.fontWeight = "bold";
-  labelRenderer.domElement.style.fontSize = 24;
   container.appendChild(labelRenderer.domElement);
 
   // 创建射线
@@ -95,24 +89,30 @@ export default () => {
   const clock = new THREE.Clock();
   const render = () => {
     const time = clock.getElapsedTime();
-    earth.rotation.y = time * Math.PI * 0.2;
-    moon.rotation.y = time * Math.PI * 0.7;
     moon.position.set(Math.sin(time) * 10, 0, Math.cos(time) * 10);
 
+    const asiaLabelPosition = asiaLabel.position.clone();
+    // 计算标签和摄像机的距离
+    const asiaLabelDistance = asiaLabelPosition.distanceTo(camera.position);
     // 检测射线碰撞
-    const asiaPosition = asiaLabel.position.clone();
-    asiaPosition.project(camera); // 将坐标投影到相机坐标空间
-    raycaster.setFromCamera(asiaPosition, camera);
+    asiaLabelPosition.project(camera); // 将坐标投影到相机坐标空间
+    raycaster.setFromCamera(asiaLabelPosition, camera);
     // 检测射线碰撞到的物体
-    const intersects = raycaster.intersectObjects(scene.children, true);
-    // 如果没有碰撞
-    if (intersects.length === 0) {
+    const asiaLabelIntersects = raycaster.intersectObjects(scene.children, true);
+    // 如果没有碰撞则显示标签
+    if (asiaLabelIntersects.length === 0) {
       asiaLabel.element.classList.remove("hidden");
       asiaLabel.element.classList.add("visible");
     } else {
-      console.log(intersects);
-      asiaLabel.element.classList.remove("visible");
-      asiaLabel.element.classList.add("hidden");
+      // 判断距离最近的遮挡物体的距离是否小于标签到摄像机距离，小于则说明球挡住了标签，则隐藏
+      const minDistance = asiaLabelIntersects[0].distance;
+      if (minDistance < asiaLabelDistance) {
+        asiaLabel.element.classList.remove("visible");
+        asiaLabel.element.classList.add("hidden");
+      } else {
+        asiaLabel.element.classList.remove("hidden");
+        asiaLabel.element.classList.add("visible");
+      }
     }
 
     // 渲染标签

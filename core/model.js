@@ -87,15 +87,16 @@ export const initThree = ({
   }
 
   // 渲染场景
-  function render() {
-    // 渲染下一帧调用的函数
-    requestAnimationFrame(render);
-    // controls 设置惯性必须调用 update()
-    if (!!controls) controls.update();
-    renderer.render(scene, camera);
-  }
-
+  let render;
   if (!disableRender) {
+    render = () => {
+      // 渲染下一帧调用的函数
+      requestAnimationFrame(render);
+      // controls 设置惯性必须调用 update()
+      if (!!controls) controls.update();
+      renderer.render(scene, camera);
+    };
+
     render();
   }
 
