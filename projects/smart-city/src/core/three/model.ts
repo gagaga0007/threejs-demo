@@ -7,7 +7,7 @@ export const camera = new THREE.PerspectiveCamera(75, window.innerHeight / windo
 camera.position.set(8, 8, 10)
 
 // --- 辅助坐标轴 ---
-export const axesHelper = new THREE.AxesHelper(5)
+export const axesHelper = new THREE.AxesHelper(50)
 
 // --- 渲染器 ---
 export const renderer = new THREE.WebGLRenderer({
@@ -26,7 +26,7 @@ controls.enableDamping = true
 // --- 场景 ---
 export const scene = new THREE.Scene()
 // 设置场景贴图
-const textureCubeLoader = new THREE.CubeTextureLoader().setPath('../public/textures/')
+const textureCubeLoader = new THREE.CubeTextureLoader().setPath('../textures/')
 const textureCube = textureCubeLoader.load(['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg'])
 scene.background = textureCube
 scene.environment = textureCube
