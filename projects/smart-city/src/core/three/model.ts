@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import * as dat from 'dat.gui'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 // --- 相机 ---
@@ -30,9 +29,6 @@ const textureCubeLoader = new THREE.CubeTextureLoader().setPath('../textures/')
 const textureCube = textureCubeLoader.load(['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg'])
 scene.background = textureCube
 scene.environment = textureCube
-
-// --- gui ---
-export const gui = new dat.GUI()
 
 // --- render ---
 export const clock = new THREE.Clock()
