@@ -4,20 +4,26 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { animate, axesHelper, camera, renderer, scene } from '@/core/three/model'
 import { createCity } from '@/core/three/mesh/city'
 import router from '@/router'
 
 const sceneRef = ref<any>(null)
+const removeFn = ref<Function>()
 
 onMounted(() => {
-  createCity()
+  const fn = createCity()
+  removeFn.value = fn.remove
 
   scene.add(camera)
   scene.add(axesHelper)
   sceneRef.value.appendChild(renderer.domElement)
   animate()
+})
+
+onUnmounted(() => {
+  removeFn.value?.()
 })
 
 const toBigScreen = () => {

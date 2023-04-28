@@ -5,7 +5,7 @@ export enum AlarmTypeEnum {
 }
 
 export const alarmTypeOptions = [
-  { key: '火警', value: AlarmTypeEnum.FIRE, texture: '../../../textures/tag/fire.png' },
-  { key: '治安', value: AlarmTypeEnum.SAFE, texture: '../../../textures/tag/safe.png' },
-  { key: '供电', value: AlarmTypeEnum.ELECTRIC, texture: '../../../textures/tag/electric.png' }
+  { key: '火警', value: AlarmTypeEnum.FIRE },
+  { key: '治安', value: AlarmTypeEnum.SAFE },
+  { key: '供电', value: AlarmTypeEnum.ELECTRIC }
 ]

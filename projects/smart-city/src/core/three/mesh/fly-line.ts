@@ -34,5 +34,12 @@ export const createFlyLine = () => {
     ease: 'none'
   })
 
-  return { mesh }
+  const remove = () => {
+    mesh.remove()
+    mesh.removeFromParent()
+    mesh.geometry.dispose()
+    mesh.material.dispose()
+  }
+
+  return { mesh, remove }
 }

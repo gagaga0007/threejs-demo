@@ -9,7 +9,9 @@ import { createLightWall } from '@/core/three/mesh/light-wall'
 import { createLightRadar } from '@/core/three/mesh/light-rader'
 import { createAlarmSprite } from '@/core/three/mesh/alarm-sprite'
 
-export const createCity = () => {
+export const createCity = (init = true) => {
+  const removeFns: Function[] = []
+
   // 添加模型
   const gltfLoader = new GLTFLoader()
   gltfLoader.load('../../../../model/city.glb', (gltf) => {
@@ -33,21 +35,27 @@ export const createCity = () => {
     })
     scene.add(gltf.scene)
 
+    if (!init) return
+
     // 添加飞线
     const flyLine = createFlyLine()
     scene.add(flyLine.mesh)
+    removeFns.push(flyLine.remove)
 
     // 添加着色器飞线
     const flyLineShader = createFlyLineShader()
     scene.add(flyLineShader.mesh)
+    removeFns.push(flyLineShader.remove)
 
     // 添加光墙
     const lightWall = createLightWall()
     scene.add(lightWall.mesh)
+    removeFns.push(lightWall.remove)
 
     // 添加雷达
     const lightRadar = createLightRadar()
     scene.add(lightRadar.mesh)
+    removeFns.push(lightRadar.remove)
 
     // 添加警告标识
     const alarmSprite = createAlarmSprite()
@@ -55,5 +63,12 @@ export const createCity = () => {
     alarmSprite.onClick(function (e: any) {
       console.log('警告', e)
     })
+    removeFns.push(alarmSprite.remove)
   })
+
+  return {
+    remove: () => {
+      removeFns.forEach((v) => v())
+    }
+  }
 }

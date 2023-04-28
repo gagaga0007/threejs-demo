@@ -1,0 +1,56 @@
+{
+  "status": "200",
+  "message": "success",
+  "list": [
+    {
+      "name": "治安",
+      "type":"safe",
+      "description": "存在隐患,需派人排除隐患",
+      "time": 20,
+      "position": {
+        "x": 56,
+        "y": 98
+      }
+    },
+    {
+      "name": "火警",
+      "type": "fire",
+      "description": "出现事故，需紧急处理",
+      "time": 20,
+      "position": {
+        "x": 48,
+        "y": 62
+      }
+    },
+    {
+      "name": "治安",
+      "type": "safe",
+      "description": "存在隐患,需派人排除隐患",
+      "time": 20,
+      "position": {
+        "x": 8,
+        "y": 95
+      }
+    },
+    {
+      "name": "治安",
+      "type": "safe",
+      "description": "出现事故，需紧急处理",
+      "time": 20,
+      "position": {
+        "x": 10,
+        "y": 9
+      }
+    },
+    {
+      "name": "电力",
+      "type": "electric",
+      "description": "出现事故，需紧急处理",
+      "time": 20,
+      "position": {
+        "x": 37,
+        "y": 90
+      }
+    }
+  ]
+}

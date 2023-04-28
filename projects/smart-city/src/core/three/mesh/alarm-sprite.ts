@@ -5,8 +5,10 @@ import { AlarmTypeEnum, alarmTypeOptions } from '@/core/options'
 export const createAlarmSprite = (type = AlarmTypeEnum.FIRE, position = { x: -1.8, z: 3 }, color = '#ffffff') => {
   const textureLoader = new THREE.TextureLoader()
 
+  const options = alarmTypeOptions.map((v) => ({ ...v, texture: `../../../textures/tag/${v.value}.png` }))
+
   // @ts-ignore
-  const map = textureLoader.load(alarmTypeOptions.find((v) => v.value === type)?.texture)
+  const map = textureLoader.load(options.find((v) => v.value === type)?.texture)
   const material = new THREE.SpriteMaterial({
     map: map,
     color: color,

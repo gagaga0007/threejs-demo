@@ -38,6 +38,12 @@ export const animate = () => {
   renderer.render(scene, camera)
 }
 
+export const removeThreeDefault = () => {
+  axesHelper.dispose()
+  controls.dispose()
+  renderer.dispose()
+}
+
 // --- 初始化操作 ---
 // 更新摄像头
 camera.aspect = window.innerWidth / window.innerHeight

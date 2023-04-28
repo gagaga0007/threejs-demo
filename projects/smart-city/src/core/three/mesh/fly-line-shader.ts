@@ -8,7 +8,7 @@ import fragment from '@/core/shaders/fly-line/fragment'
  * @param position
  * @param color
  */
-export const createFlyLineShader = (position = { x: -10, z: 0 }, color = '#ff0000') => {
+export const createFlyLineShader = (position = { x: -10, z: 0 }, color = 0xff0000) => {
   // 1、根据点生成曲线
   const linePoints = [
     new THREE.Vector3(0, 0, 0),
