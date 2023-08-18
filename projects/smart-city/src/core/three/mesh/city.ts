@@ -1,6 +1,6 @@
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import * as THREE from 'three'
-import { scene } from '../model'
+import { defaultModel } from '../model'
 import { modifyCityMaterial } from '@/core/three/modify/modifyCityMaterial'
 import { createFlyLine } from '@/core/three/mesh/fly-line'
 import { createFlyLineShader } from '@/core/three/mesh/fly-line-shader'
@@ -11,6 +11,8 @@ import { createAlarmSprite } from '@/core/three/mesh/alarm-sprite'
 
 export const createCity = (init = true) => {
   const removeFns: Function[] = []
+
+  const { scene } = defaultModel
 
   // 添加模型
   const gltfLoader = new GLTFLoader()

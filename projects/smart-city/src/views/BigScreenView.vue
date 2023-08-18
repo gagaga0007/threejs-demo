@@ -27,7 +27,7 @@
               @click="onEventClick(i)"
             >
               <h1>
-                <img class="icon" :src="options.find((v) => v.value === item.type).texture" alt="" />
+                <img class="icon" :src="options.find((v) => v.value === item.type)?.texture" alt="" />
                 <span> {{ item.name }} </span>
               </h1>
               <p>{{ item.description }}</p>
@@ -40,17 +40,18 @@
 </template>
 
 <script setup lang="ts">
-import * as THREE from 'three'
-import gsap from 'gsap'
-import { onMounted, onUnmounted, reactive, ref, watchEffect } from 'vue'
-import { animate, axesHelper, camera, controls, renderer, scene } from '@/core/three/model'
-import { createCity } from '@/core/three/mesh/city'
-import { alarmTypeOptions } from '@/core/options'
 import { getSmartCityInfo, getSmartCityList } from '@/core/api'
-import { createLightWall } from '@/core/three/mesh/light-wall'
+import { alarmTypeOptions } from '@/core/options'
+import { createAlarmSprite } from '@/core/three/mesh/alarm-sprite'
+import { createCity } from '@/core/three/mesh/city'
 import { createFlyLineShader } from '@/core/three/mesh/fly-line-shader'
 import { createLightRadar } from '@/core/three/mesh/light-rader'
-import { createAlarmSprite } from '@/core/three/mesh/alarm-sprite'
+import { createLightWall } from '@/core/three/mesh/light-wall'
+import { defaultModel } from '@/core/three/model'
+import type { DataProps } from '@/core/type'
+import gsap from 'gsap'
+import * as THREE from 'three'
+import { onMounted, onUnmounted, reactive, ref, watchEffect } from 'vue'
 
 const options = alarmTypeOptions.map((v) => ({ ...v, texture: `src/assets/tag/${v.value}.png` }))
 
@@ -59,10 +60,10 @@ const removeFn = ref<Function>()
 const currentActive = ref(null)
 const eventList = ref<any[]>([])
 const dataInfo = reactive({
-  iot: {},
-  event: {},
-  power: {},
-  test: {}
+  iot: {} as DataProps,
+  event: {} as DataProps,
+  power: {} as DataProps,
+  test: {} as DataProps
 })
 
 onMounted(() => {
@@ -71,6 +72,11 @@ onMounted(() => {
 
   const fn = createCity(false)
   removeFn.value = fn.remove
+
+  const { camera, axesHelper, renderer, scene, animate, initModel } = defaultModel
+
+  initModel()
+
   scene.add(camera)
   scene.add(axesHelper)
   sceneRef.value.appendChild(renderer.domElement)
@@ -118,7 +124,7 @@ let mapFn = {
     const lightWall = createLightWall(1, 2, position)
     // @ts-ignore
     lightWall.eventListIndex = i
-    scene.add(lightWall.mesh)
+    defaultModel.scene.add(lightWall.mesh)
     eventListMesh.push(lightWall)
   },
   safe: (position: { x: number; y: number; z: number }, i: number) => {
@@ -128,7 +134,7 @@ let mapFn = {
     const flyLineShader = createFlyLineShader(position, color)
     // @ts-ignore
     flyLineShader.eventListIndex = i
-    scene.add(flyLineShader.mesh)
+    defaultModel.scene.add(flyLineShader.mesh)
     eventListMesh.push(flyLineShader)
   },
   electric: (position: { x: number; y: number; z: number }, i: number) => {
@@ -136,7 +142,7 @@ let mapFn = {
     const lightRadar = createLightRadar(2, position)
     // @ts-ignore
     lightRadar.eventListIndex = i
-    scene.add(lightRadar.mesh)
+    defaultModel.scene.add(lightRadar.mesh)
     eventListMesh.push(lightRadar)
   }
 }
@@ -150,7 +156,7 @@ const onEventToggle = (i: number) => {
     y: 0,
     z: eventList.value?.[i].position.y / 5 - 10
   }
-  gsap.to(controls.target, {
+  gsap.to(defaultModel.controls.target, {
     duration: 1,
     x: position.x,
     y: position.y,
@@ -174,7 +180,7 @@ watchEffect(() => {
     // @ts-ignore
     alarmSprite.eventListIndex = i
     eventListMesh.push(alarmSprite)
-    scene.add(alarmSprite.mesh)
+    defaultModel.scene.add(alarmSprite.mesh)
     // @ts-ignore
     if (mapFn[item.type]) {
       // @ts-ignore

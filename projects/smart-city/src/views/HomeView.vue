@@ -4,10 +4,10 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref } from 'vue'
-import { animate, axesHelper, camera, renderer, scene } from '@/core/three/model'
 import { createCity } from '@/core/three/mesh/city'
+import { defaultModel } from '@/core/three/model'
 import router from '@/router'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 const sceneRef = ref<any>(null)
 const removeFn = ref<Function>()
@@ -15,6 +15,10 @@ const removeFn = ref<Function>()
 onMounted(() => {
   const fn = createCity()
   removeFn.value = fn.remove
+
+  const { camera, axesHelper, renderer, scene, animate, initModel } = defaultModel
+
+  initModel()
 
   scene.add(camera)
   scene.add(axesHelper)

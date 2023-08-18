@@ -1,6 +1,6 @@
-import * as THREE from 'three'
-import { camera } from '@/core/three/model'
 import { AlarmTypeEnum, alarmTypeOptions } from '@/core/options'
+import { defaultModel } from '@/core/three/model'
+import * as THREE from 'three'
 
 export const createAlarmSprite = (type = AlarmTypeEnum.FIRE, position = { x: -1.8, z: 3 }, color = '#ffffff') => {
   const textureLoader = new THREE.TextureLoader()
@@ -32,7 +32,7 @@ export const createAlarmSprite = (type = AlarmTypeEnum.FIRE, position = { x: -1.
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1
     mouse.y = -((event.clientY / window.innerHeight) * 2 - 1)
 
-    raycaster.setFromCamera(mouse, camera)
+    raycaster.setFromCamera(mouse, defaultModel.camera)
 
     // @ts-ignore
     event.mesh = mesh
