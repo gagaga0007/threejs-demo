@@ -213,8 +213,5 @@ export default () => {
   };
   render();
 
-  return {
-    scene,
-    renderer,
-  };
+  return { scene, renderer };
 };

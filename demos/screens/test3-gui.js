@@ -6,7 +6,7 @@ import { initThree } from "../core/model.js";
  * 使用 dat.gui 第三方库实现控制栏
  */
 export default () => {
-  const { scene } = initThree();
+  const { scene, renderer } = initThree();
 
   // 创建网格材质对象
   const material = new THREE.MeshLambertMaterial({
@@ -27,8 +27,10 @@ export default () => {
   // 配置项
   const params = {
     color: "#ffffff",
-    changePositionRight: () => gsap.to(cube.position, { x: cube.position.x + 50 }),
-    changePositionLeft: () => gsap.to(cube.position, { x: cube.position.x - 50 }),
+    changePositionRight: () =>
+      gsap.to(cube.position, { x: cube.position.x + 50 }),
+    changePositionLeft: () =>
+      gsap.to(cube.position, { x: cube.position.x - 50 }),
   };
 
   // 配置点击事件
@@ -40,7 +42,12 @@ export default () => {
 
   // 分组下增加选项
   // 配置坐标
-  optionFolder.add(cube.position, "x").min(-200).max(200).step(0.01).name("x 轴坐标");
+  optionFolder
+    .add(cube.position, "x")
+    .min(-200)
+    .max(200)
+    .step(0.01)
+    .name("x 轴坐标");
   // .onChange((value) => console.log("onChange: " + value)) // 修改实时触发
   // .onFinishChange((value) => console.log("onFinishChange: " + value)); // 鼠标按键抬起才触发
 
@@ -60,5 +67,7 @@ export default () => {
   return {
     // 销毁 gui 弹层
     beforeDestroy: () => gui.destroy(),
+    scene,
+    renderer,
   };
 };

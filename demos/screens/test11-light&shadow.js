@@ -11,7 +11,10 @@ import { initThree } from "../core/model.js";
  * 5、设置物体接收阴影 plane.receiveShadow = true
  */
 export default () => {
-  const { scene, renderer } = initThree({ disablePointLight: true, cameraPosition: { x: 0, y: 0, z: 10 } });
+  const { scene, renderer } = initThree({
+    disablePointLight: true,
+    cameraPosition: { x: 0, y: 0, z: 10 },
+  });
 
   // 基础网格材质
   const material = new THREE.MeshStandardMaterial();
@@ -70,5 +73,7 @@ export default () => {
   return {
     // 销毁 gui 弹层
     beforeDestroy: () => gui.destroy(),
+    scene,
+    renderer,
   };
 };

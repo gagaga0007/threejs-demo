@@ -75,7 +75,11 @@ export default () => {
     });
     // 添加力（演示为随机在 x 和 z 轴添加不同大小的力） applyLocalForce(力大小和方向, 力所在的位置)
     cubeBody.applyLocalForce(
-      new CANNON.Vec3(Math.random() * (300 - -300 + 1) + -300, 0, Math.random() * (300 - -300 + 1) + -300),
+      new CANNON.Vec3(
+        Math.random() * (300 - -300 + 1) + -300,
+        0,
+        Math.random() * (300 - -300 + 1) + -300
+      ),
       new CANNON.Vec3(0, 0, 0)
     );
 
@@ -87,10 +91,14 @@ export default () => {
   };
 
   // 设置两种物理材质的关联材质
-  const defaultContactMaterial = new CANNON.ContactMaterial(cubePhysicMaterial, planePhysicMaterial, {
-    friction: 0.5, // 摩擦系数
-    restitution: 0.7, // 弹性
-  });
+  const defaultContactMaterial = new CANNON.ContactMaterial(
+    cubePhysicMaterial,
+    planePhysicMaterial,
+    {
+      friction: 0.5, // 摩擦系数
+      restitution: 0.7, // 弹性
+    }
+  );
   // 将材料关联材质设置添加到物理世界
   world.addContactMaterial(defaultContactMaterial);
   // 设置世界默认材料（若材料没有设置，则默认是该材质）
@@ -134,5 +142,7 @@ export default () => {
       planeGeometry.dispose();
       planeMaterial.dispose();
     },
+    scene,
+    renderer,
   };
 };

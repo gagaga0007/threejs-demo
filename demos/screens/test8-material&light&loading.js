@@ -6,7 +6,7 @@ import { IDs, initThree } from "../core/model.js";
  * 贴图网站 https://www.poliigon.com/textures
  */
 export default () => {
-  const { scene } = initThree({
+  const { scene, renderer } = initThree({
     disableAmbient: true,
     disablePointLight: true,
     cameraPosition: { x: 15, y: 15, z: 15 },
@@ -62,13 +62,21 @@ export default () => {
   // 透明贴图（只保留门的部分）
   const alphaTexture = textureLoader.load("./assets/images/door/alpha.jpg");
   // 遮挡贴图（门的线条）
-  const aoTexture = textureLoader.load("./assets/images/door/ambientOcclusion.jpg");
+  const aoTexture = textureLoader.load(
+    "./assets/images/door/ambientOcclusion.jpg"
+  );
   // 置换贴图（门的部分突出）
-  const displacementTexture = textureLoader.load("./assets/images/door/height.jpg");
+  const displacementTexture = textureLoader.load(
+    "./assets/images/door/height.jpg"
+  );
   // 粗糙度贴图（门左侧合页漫反射）
-  const roughnessTexture = textureLoader.load("./assets/images/door/roughness.jpg");
+  const roughnessTexture = textureLoader.load(
+    "./assets/images/door/roughness.jpg"
+  );
   // 金属度贴图（门的金属部分）
-  const metalnessTexture = textureLoader.load("./assets/images/door/metalness.jpg");
+  const metalnessTexture = textureLoader.load(
+    "./assets/images/door/metalness.jpg"
+  );
   // 法线贴图（门在光照下显示的效果）
   const normalTexture = textureLoader.load("./assets/images/door/normal.jpg");
 
@@ -102,5 +110,10 @@ export default () => {
   plane.position.set(10, 0, 0);
   scene.add(plane);
   // 给平面设置第二组 uv（顶点），设置上遮挡纹理和置换纹理（可以看出门已经凸出来了）
-  planeGeometry.setAttribute("uv2", new THREE.BufferAttribute(planeGeometry.attributes.uv.array, 2));
+  planeGeometry.setAttribute(
+    "uv2",
+    new THREE.BufferAttribute(planeGeometry.attributes.uv.array, 2)
+  );
+
+  return { scene, renderer };
 };

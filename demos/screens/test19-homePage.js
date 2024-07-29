@@ -44,7 +44,10 @@ export default () => {
   const ballGroup = new THREE.Group(); // page3 group
   const pageGroups = [cubeGroup, triangleGroup, ballGroup];
 
-  const onPage1MouseClick = (event, { raycaster, camera, redMaterial, cubeArray }) => {
+  const onPage1MouseClick = (
+    event,
+    { raycaster, camera, redMaterial, cubeArray }
+  ) => {
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -((event.clientY / window.innerHeight) * 2 - 1);
     raycaster.setFromCamera(mouse, camera);
@@ -87,7 +90,9 @@ export default () => {
     // 创建投射光
     const raycaster = new THREE.Raycaster();
     // 监听鼠标事件
-    window.addEventListener("click", (e) => onPage1MouseClick(e, { raycaster, mouse, camera, redMaterial, cubeArray }));
+    window.addEventListener("click", (e) =>
+      onPage1MouseClick(e, { raycaster, mouse, camera, redMaterial, cubeArray })
+    );
 
     scene.add(cubeGroup);
   };
@@ -109,12 +114,22 @@ export default () => {
         }
       }
       // 设置每三个一组
-      geometry.setAttribute("position", new THREE.BufferAttribute(positionArray, 3));
+      geometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(positionArray, 3)
+      );
 
       // 设置随机颜色
-      const color = new THREE.Color(Math.random(), Math.random(), Math.random());
+      const color = new THREE.Color(
+        Math.random(),
+        Math.random(),
+        Math.random()
+      );
       // 创建材质
-      const material = new THREE.MeshBasicMaterial({ color, side: THREE.DoubleSide });
+      const material = new THREE.MeshBasicMaterial({
+        color,
+        side: THREE.DoubleSide,
+      });
       const mesh = new THREE.Mesh(geometry, material);
 
       triangleGroup.add(mesh);
@@ -235,7 +250,11 @@ export default () => {
         duration: 1,
       });
       // 对应标题飞入旋转效果
-      gsap.fromTo(`.page${newPageIndex + 1} h1`, { x: -500 }, { x: 0, rotate: "+= 360", duration: 1 });
+      gsap.fromTo(
+        `.page${newPageIndex + 1} h1`,
+        { x: -500 },
+        { x: 0, rotate: "+= 360", duration: 1 }
+      );
     }
   };
   window.addEventListener("scroll", onWindowScroll);
@@ -253,5 +272,7 @@ export default () => {
       window.removeEventListener("scroll", onWindowScroll);
       window.removeEventListener("mousemove", onMouseMove);
     },
+    scene,
+    renderer,
   };
 };

@@ -6,7 +6,7 @@ import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
  * 设置 HDR 格式的场景背景和环境纹理
  */
 export default async () => {
-  const { scene } = initThree({
+  const { scene, renderer } = initThree({
     cameraPosition: { x: 15, y: 15, z: 15 },
   });
 
@@ -33,4 +33,6 @@ export default async () => {
   });
   const sphere = new THREE.Mesh(sphereGeometry, material);
   scene.add(sphere);
+
+  return { scene, renderer };
 };

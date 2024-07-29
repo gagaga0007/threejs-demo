@@ -2,7 +2,9 @@ import * as THREE from "three";
 import { initThree } from "../core/model.js";
 
 export default () => {
-  const { scene, camera } = initThree({ cameraPosition: { x: 10, y: 10, z: 15 } });
+  const { scene, camera, renderer } = initThree({
+    cameraPosition: { x: 10, y: 10, z: 15 },
+  });
 
   const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
   const material = new THREE.MeshBasicMaterial({ wireframe: true });
@@ -45,5 +47,7 @@ export default () => {
     beforeDestroy: () => {
       window.removeEventListener("click", onMouseClick);
     },
+    scene,
+    renderer,
   };
 };

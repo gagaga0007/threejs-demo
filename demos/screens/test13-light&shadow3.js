@@ -87,5 +87,7 @@ export default () => {
   return {
     // 销毁 gui 弹层
     beforeDestroy: () => gui.destroy(),
+    scene,
+    renderer,
   };
 };

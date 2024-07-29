@@ -1,11 +1,15 @@
 import * as THREE from "three";
 import { IDs, initThree } from "../core/model.js";
-import { CSS2DRenderer, CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
+import {
+  CSS2DRenderer,
+  CSS2DObject,
+} from "three/addons/renderers/CSS2DRenderer.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 export default () => {
   const container = document.getElementById(IDs.CONTAINER);
-  container.innerHTML += '<link rel="stylesheet" href="./assets/css/test26.css" />';
+  container.innerHTML +=
+    '<link rel="stylesheet" href="./assets/css/test26.css" />';
 
   const { scene, renderer, camera } = initThree({
     disableRender: true,
@@ -16,7 +20,9 @@ export default () => {
 
   // 导入材质
   const textureLoader = new THREE.TextureLoader();
-  const earthTexture = textureLoader.load("./assets/images/earth/earth_atmos_2048.jpg");
+  const earthTexture = textureLoader.load(
+    "./assets/images/earth/earth_atmos_2048.jpg"
+  );
   const moonTexture = textureLoader.load("./assets/images/earth/moon_1024.jpg");
 
   // 创建球体和材质 - 地球
@@ -98,7 +104,10 @@ export default () => {
     asiaLabelPosition.project(camera); // 将坐标投影到相机坐标空间
     raycaster.setFromCamera(asiaLabelPosition, camera);
     // 检测射线碰撞到的物体
-    const asiaLabelIntersects = raycaster.intersectObjects(scene.children, true);
+    const asiaLabelIntersects = raycaster.intersectObjects(
+      scene.children,
+      true
+    );
     // 如果没有碰撞则显示标签
     if (asiaLabelIntersects.length === 0) {
       asiaLabel.element.classList.remove("hidden");
@@ -124,4 +133,6 @@ export default () => {
   };
 
   render();
+
+  return { scene, renderer };
 };

@@ -5,7 +5,7 @@ import { initThree } from "../core/model.js";
  * 利用缓冲区生成一个由两个三角形组成的矩形
  */
 export default () => {
-  const { scene } = initThree();
+  const { scene, renderer } = initThree();
 
   // 创建基础材质对象
   const material = new THREE.MeshBasicMaterial({
@@ -36,4 +36,6 @@ export default () => {
 
   const mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
+
+  return { scene, renderer };
 };

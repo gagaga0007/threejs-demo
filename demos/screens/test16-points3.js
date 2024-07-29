@@ -25,10 +25,14 @@ export default () => {
     // 设置顶点
     for (let i = 0; i < count * size; i++) {
       // 设置随机坐标
-      positions[i] = Math.random() * (maxPosition - minPosition + 1) + minPosition;
+      positions[i] =
+        Math.random() * (maxPosition - minPosition + 1) + minPosition;
     }
     // 设置属性 - 位置
-    particlesGeometry.setAttribute("position", new THREE.BufferAttribute(positions, size));
+    particlesGeometry.setAttribute(
+      "position",
+      new THREE.BufferAttribute(positions, size)
+    );
 
     // 创建点材质
     const pointsMaterial = new THREE.PointsMaterial({ size: materialSize });
@@ -75,4 +79,6 @@ export default () => {
   }
 
   render();
+
+  return { scene, renderer };
 };

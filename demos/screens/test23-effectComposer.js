@@ -38,11 +38,14 @@ export default () => {
 
   // 加载模型
   const gltfLoader = new GLTFLoader();
-  gltfLoader.load("./assets/models/DamagedHelmet/DamagedHelmet.gltf", (gltf) => {
-    console.log(gltf);
-    const mesh = gltf.scene.children[0];
-    scene.add(mesh);
-  });
+  gltfLoader.load(
+    "./assets/models/DamagedHelmet/DamagedHelmet.gltf",
+    (gltf) => {
+      console.log(gltf);
+      const mesh = gltf.scene.children[0];
+      scene.add(mesh);
+    }
+  );
 
   // 创建合成效果器
   const effectComposer = new EffectComposer(renderer);
@@ -82,7 +85,11 @@ export default () => {
 
   // gui 控制光照效果
   const unrealBloomFolder = gui.addFolder("光照选项");
-  unrealBloomFolder.add(renderer, "toneMappingExposure").min(0).max(2).step(0.1);
+  unrealBloomFolder
+    .add(renderer, "toneMappingExposure")
+    .min(0)
+    .max(2)
+    .step(0.1);
   unrealBloomFolder.add(unrealBloomPass, "strength").min(0).max(2).step(0.1);
   unrealBloomFolder.add(unrealBloomPass, "radius").min(0).max(2).step(0.1);
   unrealBloomFolder.add(unrealBloomPass, "threshold").min(0).max(1).step(0.1);
@@ -96,7 +103,9 @@ export default () => {
   const shaderPass = new ShaderPass({
     uniforms: {
       tDiffuse: { value: null },
-      uColor: { value: new THREE.Color(colorPrams.r, colorPrams.g, colorPrams.b) },
+      uColor: {
+        value: new THREE.Color(colorPrams.r, colorPrams.g, colorPrams.b),
+      },
     },
     vertexShader: /* glsl */ `
       varying vec2 vUv;
@@ -129,7 +138,9 @@ export default () => {
       .min(-1)
       .max(1)
       .step(0.01)
-      .onChange((value) => (shaderPass.uniforms.uColor.value[property] = value));
+      .onChange(
+        (value) => (shaderPass.uniforms.uColor.value[property] = value)
+      );
   };
   createGuiColor("r");
   createGuiColor("g");
@@ -137,7 +148,9 @@ export default () => {
 
   // --- 添加纹理并通过着色器与原始纹理混合，并增加波浪效果 ---
   const textureLoader = new THREE.TextureLoader();
-  const normalTexture = textureLoader.load("../assets/images/particles/interfaceNormalMap.png");
+  const normalTexture = textureLoader.load(
+    "../assets/images/particles/interfaceNormalMap.png"
+  );
   const techPass = new ShaderPass({
     uniforms: {
       tDiffuse: { value: null },
@@ -198,5 +211,7 @@ export default () => {
 
   return {
     beforeDestroy: () => gui.destroy(),
+    scene,
+    renderer,
   };
 };

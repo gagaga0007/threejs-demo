@@ -5,7 +5,7 @@ import { initThree } from "../core/model.js";
  * 利用缓冲区生成数个随机三角形
  */
 export default () => {
-  const { scene } = initThree();
+  const { scene, renderer } = initThree();
 
   // 生成 10 个三角形
   for (let i = 0; i <= 10; i++) {
@@ -18,7 +18,10 @@ export default () => {
       positionArray[j] = Math.random() * (100 - -100 + 1) + -100;
     }
     // 设置每三个一组
-    geometry.setAttribute("position", new THREE.BufferAttribute(positionArray, 3));
+    geometry.setAttribute(
+      "position",
+      new THREE.BufferAttribute(positionArray, 3)
+    );
 
     // 设置随机颜色
     const color = new THREE.Color(Math.random(), Math.random(), Math.random());
@@ -29,4 +32,6 @@ export default () => {
     // 添加到场景
     scene.add(cube);
   }
+
+  return { scene, renderer };
 };

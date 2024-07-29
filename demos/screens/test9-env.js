@@ -5,7 +5,7 @@ import { initThree } from "../core/model.js";
  * 设置场景背景、环境纹理
  */
 export default () => {
-  const { scene } = initThree({
+  const { scene, renderer } = initThree({
     cameraPosition: { x: 15, y: 15, z: 15 },
   });
 
@@ -35,4 +35,6 @@ export default () => {
   });
   const sphere = new THREE.Mesh(sphereGeometry, material);
   scene.add(sphere);
+
+  return { scene, renderer };
 };

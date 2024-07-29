@@ -25,10 +25,15 @@ export default () => {
   // 在曲线里获取指定数量的点（此处示例为 101 个点，100 为分割数，所以得到的点是 101 个）
   const spherePoints = sphereCurve.getPoints(100);
   // 创建几何体
-  const spherePointsGeometry = new THREE.BufferGeometry().setFromPoints(spherePoints);
+  const spherePointsGeometry = new THREE.BufferGeometry().setFromPoints(
+    spherePoints
+  );
   const sphereLineMaterial = new THREE.LineBasicMaterial({ color: "white" });
   // 创建线
-  const sphereCurveLine = new THREE.Line(spherePointsGeometry, sphereLineMaterial);
+  const sphereCurveLine = new THREE.Line(
+    spherePointsGeometry,
+    sphereLineMaterial
+  );
   scene.add(sphereCurveLine);
 
   // 摄像机 - 根据点创建曲线
@@ -48,10 +53,15 @@ export default () => {
   // 在曲线里获取指定数量的点（此处示例为 101 个点，100 为分割数，所以得到的点是 101 个）
   const cameraPoints = cameraCurve.getPoints(100);
   // 创建几何体
-  const cameraPointsGeometry = new THREE.BufferGeometry().setFromPoints(cameraPoints);
+  const cameraPointsGeometry = new THREE.BufferGeometry().setFromPoints(
+    cameraPoints
+  );
   const cameraLineMaterial = new THREE.LineBasicMaterial({ color: "yellow" });
   // 创建线
-  const cameraCurveLine = new THREE.Line(cameraPointsGeometry, cameraLineMaterial);
+  const cameraCurveLine = new THREE.Line(
+    cameraPointsGeometry,
+    cameraLineMaterial
+  );
   scene.add(cameraCurveLine);
 
   const clock = new THREE.Clock();
@@ -80,4 +90,6 @@ export default () => {
   };
 
   render();
+
+  return { scene, renderer };
 };

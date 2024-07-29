@@ -5,11 +5,13 @@ import { initThree } from "../core/model.js";
  * 点、点材质 - 星系效果
  */
 export default () => {
-  const { scene } = initThree();
+  const { scene, renderer } = initThree();
 
   // 加载纹理
   const textureLoader = new THREE.TextureLoader();
-  const particlesTexture = textureLoader.load("./assets/images/particles/1.png");
+  const particlesTexture = textureLoader.load(
+    "./assets/images/particles/1.png"
+  );
 
   const params = {
     count: 30000, // 生成数量
@@ -43,15 +45,22 @@ export default () => {
     // const distance = Math.random() * params.radius
 
     // 设置密集程度（越靠近原点和轴线越密集）
-    const randomX = (Math.pow(Math.random() * 6 - 3, 3) * (params.radius - distance)) / 200;
-    const randomY = (Math.pow(Math.random() * 6 - 3, 3) * (params.radius - distance)) / 200;
-    const randomZ = (Math.pow(Math.random() * 6 - 3, 3) * (params.radius - distance)) / 200;
+    const randomX =
+      (Math.pow(Math.random() * 6 - 3, 3) * (params.radius - distance)) / 200;
+    const randomY =
+      (Math.pow(Math.random() * 6 - 3, 3) * (params.radius - distance)) / 200;
+    const randomZ =
+      (Math.pow(Math.random() * 6 - 3, 3) * (params.radius - distance)) / 200;
 
     // 设置坐标点
     const current = i * 3;
-    positions[current] = Math.cos(branchAngel + distance * params.rotateScale) * distance + randomX;
+    positions[current] =
+      Math.cos(branchAngel + distance * params.rotateScale) * distance +
+      randomX;
     positions[current + 1] = 0 + randomY;
-    positions[current + 2] = Math.sin(branchAngel + distance * params.rotateScale) * distance + randomZ;
+    positions[current + 2] =
+      Math.sin(branchAngel + distance * params.rotateScale) * distance +
+      randomZ;
 
     // 混合颜色
     const mixColor = centerColor.clone();
@@ -79,4 +88,6 @@ export default () => {
   // 生成点
   const points = new THREE.Points(geometry, material);
   scene.add(points);
+
+  return { scene, renderer };
 };

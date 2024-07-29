@@ -6,7 +6,7 @@ import { initThree } from "../core/model.js";
  * 素材地址：aigei.com
  */
 export default () => {
-  const { scene } = initThree();
+  const { scene, renderer } = initThree();
 
   // 生成星空效果
   const particlesGeometry = new THREE.BufferGeometry();
@@ -22,14 +22,21 @@ export default () => {
   // 设置顶点
   for (let i = 0; i < count * size; i++) {
     // 设置随机坐标
-    positions[i] = Math.random() * (maxPosition - minPosition + 1) + minPosition;
+    positions[i] =
+      Math.random() * (maxPosition - minPosition + 1) + minPosition;
     // 设置颜色
     colors[i] = Math.random();
   }
   // 设置属性 - 位置
-  particlesGeometry.setAttribute("position", new THREE.BufferAttribute(positions, size));
+  particlesGeometry.setAttribute(
+    "position",
+    new THREE.BufferAttribute(positions, size)
+  );
   // 设置属性 - 颜色（* 点材质需要设置 vertexColors 为 true）
-  particlesGeometry.setAttribute("color", new THREE.BufferAttribute(colors, size));
+  particlesGeometry.setAttribute(
+    "color",
+    new THREE.BufferAttribute(colors, size)
+  );
 
   // 创建点材质
   const pointsMaterial = new THREE.PointsMaterial({ size: 7.0 });
@@ -51,4 +58,6 @@ export default () => {
 
   // *** 设置启用顶点着色 ***
   pointsMaterial.vertexColors = true;
+
+  return { scene, renderer };
 };

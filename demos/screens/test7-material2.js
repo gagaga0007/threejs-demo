@@ -5,13 +5,15 @@ import { initThree } from "../core/model.js";
  * 材质 - 纹理的一些效果、透明纹理、遮挡纹理
  */
 export default () => {
-  const { scene } = initThree();
+  const { scene, renderer } = initThree();
 
   // 导入贴图
   const textureLoader = new THREE.TextureLoader();
   const texture = textureLoader.load("./assets/images/door/color.jpg");
   const alphaTexture = textureLoader.load("./assets/images/door/alpha.jpg");
-  const aoTexture = textureLoader.load("./assets/images/door/ambientOcclusion.jpg");
+  const aoTexture = textureLoader.load(
+    "./assets/images/door/ambientOcclusion.jpg"
+  );
 
   // 纹理显示效果设置
   // 默认为 LinearFilter，是获取四个最接近的纹素，并在他们之间进行双线性插值（可以理解为比较清晰）
@@ -47,5 +49,10 @@ export default () => {
   plane.position.set(150, 0, 0);
   scene.add(plane);
   // 给平面设置第二组 uv，设置上遮挡纹理
-  planeGeometry.setAttribute("uv2", new THREE.BufferAttribute(planeGeometry.attributes.uv.array, 2));
+  planeGeometry.setAttribute(
+    "uv2",
+    new THREE.BufferAttribute(planeGeometry.attributes.uv.array, 2)
+  );
+
+  return { scene, renderer };
 };

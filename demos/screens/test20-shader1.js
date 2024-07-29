@@ -7,7 +7,7 @@ import basicFragmentShader from "../core/shader/basic/fragment.js";
  * 着色器 - 着色器材质
  */
 export default () => {
-  const { scene } = initThree();
+  const { scene, renderer } = initThree();
 
   const shaderMaterial = new THREE.ShaderMaterial({
     // 顶点着色器
@@ -17,7 +17,12 @@ export default () => {
   });
 
   // 创建平面
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(100, 100, 64, 64), shaderMaterial);
+  const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(100, 100, 64, 64),
+    shaderMaterial
+  );
 
   scene.add(floor);
+
+  return { scene, renderer };
 };

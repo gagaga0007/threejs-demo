@@ -36,7 +36,10 @@ export default () => {
   });
 
   // 创建平面
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(1, 1, 64, 64), rawShaderMaterial);
+  const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1, 64, 64),
+    rawShaderMaterial
+  );
   scene.add(floor);
 
   const clock = new THREE.Clock();
@@ -51,4 +54,6 @@ export default () => {
   };
 
   render();
+
+  return { scene, renderer };
 };

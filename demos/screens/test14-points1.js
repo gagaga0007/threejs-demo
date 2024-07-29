@@ -5,7 +5,7 @@ import { initThree } from "../core/model.js";
  * 点、点材质
  */
 export default () => {
-  const { scene } = initThree();
+  const { scene, renderer } = initThree();
 
   // 创建球几何体
   const sphereGeometry = new THREE.SphereGeometry(100, 30, 30);
@@ -31,4 +31,6 @@ export default () => {
   pointsMaterial.depthWrite = false;
   // 混合模式
   pointsMaterial.blending = THREE.AdditiveBlending;
+
+  return { scene, renderer };
 };

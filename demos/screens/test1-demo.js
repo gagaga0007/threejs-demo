@@ -6,7 +6,7 @@ import { IDs, initThree } from "../core/model.js";
  */
 export default () => {
   // 默认生成一些必要内容
-  const { scene } = initThree();
+  const { scene, renderer } = initThree();
 
   // 创建网格材质对象
   const material = new THREE.MeshLambertMaterial({
@@ -100,9 +100,14 @@ export default () => {
       y: cube.position.y + y,
       z: cube.position.z + z,
       duration,
-      onStart: () => console.log(`平移开始, 传入参数: x: ${x}, y: ${y}, z: ${z}`),
+      onStart: () =>
+        console.log(`平移开始, 传入参数: x: ${x}, y: ${y}, z: ${z}`),
       onComplete: () =>
-        console.log(`平移完成! x: ${cube.position.x + x}, y: ${cube.position.y + y}, z: ${cube.position.z + z}`),
+        console.log(
+          `平移完成! x: ${cube.position.x + x}, y: ${cube.position.y + y}, z: ${
+            cube.position.z + z
+          }`
+        ),
       ...others,
     });
   }
@@ -170,4 +175,6 @@ export default () => {
       document.exitFullscreen();
     }
   }
+
+  return { scene, renderer };
 };

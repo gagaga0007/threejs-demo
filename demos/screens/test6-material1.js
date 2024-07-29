@@ -6,7 +6,7 @@ import { initThree } from "../core/model.js";
  * MeshBasicMaterial 基础材质，不受光照影响
  */
 export default () => {
-  const { scene } = initThree();
+  const { scene, renderer } = initThree();
 
   // 导入贴图
   const textureLoader = new THREE.TextureLoader();
@@ -36,4 +36,6 @@ export default () => {
   const cube = new THREE.Mesh(cubeGeometry, basicMaterial);
 
   scene.add(cube);
+
+  return { scene, renderer };
 };

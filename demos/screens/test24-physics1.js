@@ -70,10 +70,14 @@ export default () => {
   world.addBody(planeBody);
 
   // 设置两种物理材质的关联材质
-  const defaultContactMaterial = new CANNON.ContactMaterial(spherePhysicMaterial, planePhysicMaterial, {
-    friction: 0.1, // 摩擦系数
-    restitution: 0.7, // 弹性
-  });
+  const defaultContactMaterial = new CANNON.ContactMaterial(
+    spherePhysicMaterial,
+    planePhysicMaterial,
+    {
+      friction: 0.1, // 摩擦系数
+      restitution: 0.7, // 弹性
+    }
+  );
   // 将材料关联材质设置添加到物理世界
   world.addContactMaterial(defaultContactMaterial);
 
@@ -115,5 +119,7 @@ export default () => {
       planeGeometry.dispose();
       planeMaterial.dispose();
     },
+    scene,
+    renderer,
   };
 };
