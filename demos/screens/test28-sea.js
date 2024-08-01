@@ -3,10 +3,15 @@ import { IDs } from "../core/model.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import vertexShader from "../core/shader/sea/vertex.js";
 import fragmentShader from "../core/shader/sea/fragment.js";
+import { ResourceTracker } from "../core/ResourceTracker.js";
 
 export default () => {
+  // 统一管理资源
+  const resTracker = new ResourceTracker();
+  const track = resTracker.track.bind(resTracker);
+
   // 渲染器
-  const renderer = new THREE.WebGLRenderer();
+  const renderer = track(new THREE.WebGLRenderer());
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
   const container = document.getElementById(IDs.CONTAINER);
@@ -14,11 +19,13 @@ export default () => {
   container.appendChild(canvasElement);
 
   // 相机
-  const camera = new THREE.PerspectiveCamera(
-    50,
-    window.innerWidth / window.innerHeight,
-    1,
-    1000
+  const camera = track(
+    new THREE.PerspectiveCamera(
+      50,
+      window.innerWidth / window.innerHeight,
+      1,
+      1000
+    )
   );
   camera.position.set(0, 10, 20);
 
@@ -31,53 +38,59 @@ export default () => {
   window.addEventListener("resize", resize, false);
 
   // 场景
-  const scene = new THREE.Scene();
+  const scene = track(new THREE.Scene());
 
   // 控制器
-  const controls = new OrbitControls(camera, renderer.domElement);
+  const controls = track(new OrbitControls(camera, renderer.domElement));
 
   // 时钟
-  const clock = new THREE.Clock();
+  const clock = track(new THREE.Clock());
   let elapsedTime = clock.getElapsedTime();
 
   // 平行光
-  const light = new THREE.DirectionalLight(0xffffff, 0.5);
+  const light = track(new THREE.DirectionalLight(0xffffff, 0.5));
   light.position.set(0, 10, 20);
   scene.add(light);
 
   // 平行光2
-  const light2 = new THREE.DirectionalLight(0xffffff, 0.1);
+  const light2 = track(new THREE.DirectionalLight(0xffffff, 0.1));
   light2.position.set(-5, 5, -5);
   scene.add(light2);
 
   // 环境光
-  const light3 = new THREE.AmbientLight(0xffffff, 0.2);
+  const light3 = track(new THREE.AmbientLight(0xffffff, 0.2));
   scene.add(light3);
 
   // 模拟小船
-  const box = new THREE.Mesh(
-    new THREE.BoxGeometry(2, 2, 2),
-    new THREE.MeshBasicMaterial()
+  const box = track(
+    new THREE.Mesh(
+      new THREE.BoxGeometry(2, 2, 2),
+      new THREE.MeshBasicMaterial()
+    )
   );
   scene.add(box);
 
   // 法线辅助器
-  const helperGeometry = new THREE.BufferGeometry();
+  const helperGeometry = track(new THREE.BufferGeometry());
   helperGeometry.setAttribute(
     "position",
     new THREE.BufferAttribute(new Float32Array([0, 0, 0, 0, 5, 0]), 3)
   );
-  const lineHelper = new THREE.LineSegments(
-    helperGeometry,
-    new THREE.MeshBasicMaterial({ color: 0xff0000, depthTest: false })
+  const lineHelper = track(
+    new THREE.LineSegments(
+      helperGeometry,
+      new THREE.MeshBasicMaterial({ color: 0xff0000, depthTest: false })
+    )
   );
   scene.add(lineHelper);
 
   // 海平面
   const SCALE = 5;
 
-  const texture = new THREE.TextureLoader().load(
-    "https://threejs.org/examples/textures/water.jpg"
+  const texture = track(
+    new THREE.TextureLoader().load(
+      "https://threejs.org/examples/textures/water.jpg"
+    )
   );
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 
@@ -90,18 +103,20 @@ export default () => {
     depthWrite: true,
   };
 
-  const material = new THREE.ShaderMaterial({
-    uniforms,
-    vertexShader,
-    fragmentShader,
-    side: THREE.DoubleSide,
-    wireframe: true,
-  });
+  const material = track(
+    new THREE.ShaderMaterial({
+      uniforms,
+      vertexShader,
+      fragmentShader,
+      side: THREE.DoubleSide,
+      wireframe: true,
+    })
+  );
 
-  const geometry = new THREE.PlaneGeometry(100, 100, 500, 500);
+  const geometry = track(new THREE.PlaneGeometry(100, 100, 500, 500));
   geometry.rotateX(-Math.PI / 2);
 
-  const mesh = new THREE.Mesh(geometry, material);
+  const mesh = track(new THREE.Mesh(geometry, material));
   scene.add(mesh);
 
   // dx dz 求导公式，用于计算斜率
@@ -211,7 +226,15 @@ export default () => {
     controls.update();
     renderer.render(scene, camera);
   };
+
   render();
 
-  return { scene, renderer };
+  return {
+    beforeDestroy: () => {
+      window.removeEventListener("resize", resize);
+      resTracker.dispose();
+    },
+    scene,
+    renderer,
+  };
 };
